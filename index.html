@@ -1,12 +1,74 @@
-<!doctype html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>Authorized Access</title>
-  </head>
-  <body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Krish Group Secure Portal</title>
+  <style>
+    body {
+      background-color: #0d1117;
+      color: #f0f6fc;
+      font-family: Arial, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      text-align: center;
+      background-color: #161b22;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+      width: 350px;
+    }
+    input[type="password"] {
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      width: 80%;
+      margin-top: 15px;
+      background-color: #0d1117;
+      color: white;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #238636;
+      border: none;
+      border-radius: 5px;
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    button:hover {
+      background-color: #2ea043;
+    }
+    h1 {
+      font-size: 1.5em;
+      color: #58a6ff;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
     <h1>Authorized Access Only</h1>
-    <p>Click below to open Reckon:</p>
-    <a href="https://id.reckon.com/login/?redirect_url=https%3A%2F%2Fportal.reckon.com%2F%23callback&state=qldcomqurhq" target="_blank" rel="noopener noreferrer">Open Reckon Portal</a>
-  </body>
+    <p>Please enter your secure access password:</p>
+    <input type="password" id="password" placeholder="Enter Password">
+    <button onclick="checkPassword()">Enter Portal</button>
+  </div>
+
+  <script>
+    function checkPassword() {
+      const input = document.getElementById('password').value;
+      const correctPassword = "Priti_ravi12(2007)"; // 🔒 CHANGE THIS
+      if (input === correctPassword) {
+        window.location.href = "https://portal.reckon.com/"; // Reckon link in same tab
+      } else {
+        alert("Incorrect password. Unauthorized access!");
+      }
+    }
+  </script>
+</body>
 </html>
