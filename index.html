@@ -5,129 +5,142 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Krish Group Secure Portal</title>
   <style>
-    body {
-      background-color: #0d1117;
-      color: #f0f6fc;
-      font-family: Arial, sans-serif;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
+    * {
+      box-sizing: border-box;
       margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #0b1a2f;
+      color: #ffffff;
+      display: flex;
       flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
     }
 
     /* Top Banner */
     .banner {
       width: 100%;
-      background-color: #ff4d4f;
-      color: white;
+      background-color: #1a73e8;
+      color: #ffffff;
       text-align: center;
-      padding: 12px 0;
-      font-weight: bold;
+      padding: 10px 0;
+      font-weight: 600;
       position: fixed;
       top: 0;
       left: 0;
       z-index: 1000;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
       font-size: 0.95em;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
     }
 
     /* Container */
     .container {
-      text-align: center;
-      background-color: #161b22;
+      background-color: #11263b;
       padding: 50px 30px;
       border-radius: 15px;
       box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
-      width: 380px;
-      margin-top: 90px; /* space for banner */
+      width: 400px;
+      text-align: center;
+      margin-top: 90px;
       display: flex;
       flex-direction: column;
       align-items: center;
+      position: relative;
     }
 
     /* Logo */
     .logo {
-      width: 80px;
-      height: 80px;
+      width: 90px;
+      height: 90px;
       margin-bottom: 20px;
-      background: url('https://via.placeholder.com/80?text=KG') no-repeat center center;
+      background: url('https://via.placeholder.com/90?text=KG') no-repeat center center;
       background-size: contain;
-      border-radius: 10px;
+      border-radius: 12px;
     }
 
     h1 {
-      font-size: 1.6em;
-      color: #58a6ff;
-      margin-bottom: 15px;
+      font-size: 1.8em;
+      color: #1a73e8;
+      margin-bottom: 10px;
     }
 
     p {
-      margin-bottom: 15px;
+      font-size: 1em;
+      color: #cfd8e4;
+      margin-bottom: 20px;
     }
 
     input[type="password"] {
+      width: 100%;
       padding: 12px;
-      border: none;
-      border-radius: 5px;
-      width: 85%;
-      margin-top: 10px;
-      background-color: #0d1117;
-      color: white;
+      margin-bottom: 20px;
+      border: 1px solid #1a73e8;
+      border-radius: 6px;
+      background-color: #0b1a2f;
+      color: #ffffff;
       font-size: 1em;
+      outline: none;
+      transition: border-color 0.3s ease;
+    }
+
+    input[type="password"]:focus {
+      border-color: #4fc3f7;
+      box-shadow: 0 0 8px rgba(79, 195, 247, 0.5);
     }
 
     button {
-      margin-top: 20px;
       padding: 12px 25px;
-      background-color: #238636;
       border: none;
-      border-radius: 5px;
-      color: white;
-      cursor: pointer;
+      border-radius: 6px;
+      background-color: #1a73e8;
+      color: #ffffff;
       font-weight: bold;
       font-size: 1em;
-      transition: background-color 0.3s ease;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      position: relative;
+      z-index: 2;
     }
 
-    button:hover {
-      background-color: #2ea043;
+    button:disabled {
+      background-color: #1565c0;
+      cursor: not-allowed;
     }
 
-    /* Responsive */
-    @media (max-width: 420px) {
-      .container {
-        width: 90%;
-        padding: 40px 20px;
-      }
+    button:hover:not(:disabled) {
+      background-color: #1565c0;
+      transform: translateY(-2px);
     }
-  </style>
-</head>
-<body>
 
-  <div class="banner">
-    ⚠️ Reminder: For your security, open this portal in Incognito/Private mode.
-  </div>
-
-  <div class="container">
-    <div class="logo"></div>
-    <h1>Krish Group Secure Portal</h1>
-    <p>Please enter your secure access password:</p>
-    <input type="password" id="password" placeholder="Enter Password">
-    <button onclick="checkPassword()">Enter Portal</button>
-  </div>
-
-  <script>
-    function checkPassword() {
-      const input = document.getElementById('password').value;
-      const correctPassword = "Priti_ravi12(2007)"; // 🔒 CHANGE THIS
-      if (input === correctPassword) {
-        window.location.href = "https://portal.reckon.com/"; // Redirect to Reckon
-      } else {
-        alert("Incorrect password. Unauthorized access!");
-      }
+    /* Loader */
+    .loader-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(11, 26, 47, 0.9);
+      border-radius: 15px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      z-index: 3;
+      flex-direction: column;
     }
-  </script>
-</body>
-</html>
+
+    .loader-overlay.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .spinner {
+      border: 6px solid #1a73e8;
+      border-top: 6p
