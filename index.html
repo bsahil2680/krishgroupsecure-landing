@@ -14,100 +14,111 @@
       justify-content: center;
       height: 100vh;
       margin: 0;
+      flex-direction: column;
     }
+
+    /* Top Banner */
+    .banner {
+      width: 100%;
+      background-color: #ff4d4f;
+      color: white;
+      text-align: center;
+      padding: 12px 0;
+      font-weight: bold;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+      font-size: 0.95em;
+    }
+
+    /* Container */
     .container {
       text-align: center;
       background-color: #161b22;
-      padding: 40px;
+      padding: 50px 30px;
       border-radius: 15px;
-      box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
-      width: 350px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+      width: 380px;
+      margin-top: 90px; /* space for banner */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
+
+    /* Logo */
+    .logo {
+      width: 80px;
+      height: 80px;
+      margin-bottom: 20px;
+      background: url('https://via.placeholder.com/80?text=KG') no-repeat center center;
+      background-size: contain;
+      border-radius: 10px;
+    }
+
+    h1 {
+      font-size: 1.6em;
+      color: #58a6ff;
+      margin-bottom: 15px;
+    }
+
+    p {
+      margin-bottom: 15px;
+    }
+
     input[type="password"] {
-      padding: 10px;
+      padding: 12px;
       border: none;
       border-radius: 5px;
-      width: 80%;
-      margin-top: 15px;
+      width: 85%;
+      margin-top: 10px;
       background-color: #0d1117;
       color: white;
+      font-size: 1em;
     }
+
     button {
       margin-top: 20px;
-      padding: 10px 20px;
+      padding: 12px 25px;
       background-color: #238636;
       border: none;
       border-radius: 5px;
       color: white;
       cursor: pointer;
       font-weight: bold;
+      font-size: 1em;
+      transition: background-color 0.3s ease;
     }
+
     button:hover {
       background-color: #2ea043;
     }
-    h1 {
-      font-size: 1.5em;
-      color: #58a6ff;
-    }
-    .blocked-message {
-      color: red;
-      font-weight: bold;
-      font-size: 1.2em;
-    }
-    /* Hide the password section initially */
-    #passwordSection {
-      display: none;
+
+    /* Responsive */
+    @media (max-width: 420px) {
+      .container {
+        width: 90%;
+        padding: 40px 20px;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="container" id="container">
-    <h1>Authorized Access Only</h1>
-    <div id="passwordSection">
-      <p>Please enter your secure access password:</p>
-      <input type="password" id="password" placeholder="Enter Password">
-      <button onclick="checkPassword()">Enter Portal</button>
-    </div>
+
+  <div class="banner">
+    ⚠️ Reminder: For your security, open this portal in Incognito/Private mode.
+  </div>
+
+  <div class="container">
+    <div class="logo"></div>
+    <h1>Krish Group Secure Portal</h1>
+    <p>Please enter your secure access password:</p>
+    <input type="password" id="password" placeholder="Enter Password">
+    <button onclick="checkPassword()">Enter Portal</button>
   </div>
 
   <script>
-    // --- MODERN INCÓGNITO DETECTION ---
-    async function detectIncognito() {
-      return new Promise((resolve) => {
-        const fs = window.RequestFileSystem || window.webkitRequestFileSystem;
-        if (fs) { 
-          fs(window.TEMPORARY, 100, () => resolve(false), () => resolve(true));
-        } else if (navigator.storage && navigator.storage.estimate) {
-          navigator.storage.estimate().then((estimate) => {
-            if (estimate.quota && estimate.quota < 120 * 1024 * 1024) {
-              resolve(true);
-            } else {
-              resolve(false);
-            }
-          });
-        } else {
-          resolve(false);
-        }
-      });
-    }
-
-    // --- RUN DETECTION ---
-    detectIncognito().then((isIncognito) => {
-      const container = document.getElementById('container');
-      const passwordSection = document.getElementById('passwordSection');
-
-      if (isIncognito) {
-        // Show password input
-        passwordSection.style.display = "block";
-        alert("Reminder: For your security, always use Incognito/Private mode.");
-      } else {
-        // Block access
-        container.innerHTML = "<p class='blocked-message'>Access Blocked ⚠️<br>Please open this page in Incognito/Private mode.</p>";
-        alert("⚠️ For your security, please open this portal in Incognito/Private mode.");
-      }
-    });
-
-    // --- PASSWORD CHECK ---
     function checkPassword() {
       const input = document.getElementById('password').value;
       const correctPassword = "Priti_ravi12(2007)"; // 🔒 CHANGE THIS
