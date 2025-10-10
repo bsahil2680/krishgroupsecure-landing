@@ -54,14 +54,20 @@
       font-weight: bold;
       font-size: 1.2em;
     }
+    /* Hide the password section initially */
+    #passwordSection {
+      display: none;
+    }
   </style>
 </head>
 <body>
   <div class="container" id="container">
     <h1>Authorized Access Only</h1>
-    <p>Please enter your secure access password:</p>
-    <input type="password" id="password" placeholder="Enter Password">
-    <button onclick="checkPassword()">Enter Portal</button>
+    <div id="passwordSection">
+      <p>Please enter your secure access password:</p>
+      <input type="password" id="password" placeholder="Enter Password">
+      <button onclick="checkPassword()">Enter Portal</button>
+    </div>
   </div>
 
   <script>
@@ -70,8 +76,47 @@
       return new Promise((resolve) => {
         const fs = window.RequestFileSystem || window.webkitRequestFileSystem;
         if (fs) { 
-          // Legacy fallback
           fs(window.TEMPORARY, 100, () => resolve(false), () => resolve(true));
         } else if (navigator.storage && navigator.storage.estimate) {
           navigator.storage.estimate().then((estimate) => {
-            // Quota in Incognito is typically
+            if (estimate.quota && estimate.quota < 120 * 1024 * 1024) {
+              resolve(true);
+            } else {
+              resolve(false);
+            }
+          });
+        } else {
+          resolve(false);
+        }
+      });
+    }
+
+    // --- RUN DETECTION ---
+    detectIncognito().then((isIncognito) => {
+      const container = document.getElementById('container');
+      const passwordSection = document.getElementById('passwordSection');
+
+      if (isIncognito) {
+        // Show password input
+        passwordSection.style.display = "block";
+        alert("Reminder: For your security, always use Incognito/Private mode.");
+      } else {
+        // Block access
+        container.innerHTML = "<p class='blocked-message'>Access Blocked ⚠️<br>Please open this page in Incognito/Private mode.</p>";
+        alert("⚠️ For your security, please open this portal in Incognito/Private mode.");
+      }
+    });
+
+    // --- PASSWORD CHECK ---
+    function checkPassword() {
+      const input = document.getElementById('password').value;
+      const correctPassword = "Priti_ravi12(2007)"; // 🔒 CHANGE THIS
+      if (input === correctPassword) {
+        window.location.href = "https://portal.reckon.com/"; // Redirect to Reckon
+      } else {
+        alert("Incorrect password. Unauthorized access!");
+      }
+    }
+  </script>
+</body>
+</html>
