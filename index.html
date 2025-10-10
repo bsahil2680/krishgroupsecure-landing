@@ -49,10 +49,15 @@
       font-size: 1.5em;
       color: #58a6ff;
     }
+    .blocked-message {
+      color: red;
+      font-weight: bold;
+      font-size: 1.2em;
+    }
   </style>
 </head>
 <body>
-  <div class="container">
+  <div class="container" id="container">
     <h1>Authorized Access Only</h1>
     <p>Please enter your secure access password:</p>
     <input type="password" id="password" placeholder="Enter Password">
@@ -60,15 +65,40 @@
   </div>
 
   <script>
+    // --- INCÓGNITO DETECTION ---
+    function detectIncognito(callback) {
+      const fs = window.RequestFileSystem || window.webkitRequestFileSystem;
+      if (!fs) {
+        callback(false); // Browser doesn't support detection
+      } else {
+        fs(window.TEMPORARY, 100, () => callback(false), () => callback(true));
+      }
+    }
+
+    detectIncognito(function(isIncognito) {
+      const container = document.getElementById('container');
+      if (!isIncognito) {
+        // Block access
+        container.innerHTML = "<p class='blocked-message'>Access Blocked ⚠️<br>Please open this page in Incognito/Private mode.</p>";
+        alert("⚠️ For your security, please open this portal in Incognito/Private mode.");
+      }
+    });
+
+    // --- PASSWORD CHECK ---
     function checkPassword() {
       const input = document.getElementById('password').value;
       const correctPassword = "Priti_ravi12(2007)"; // 🔒 CHANGE THIS
       if (input === correctPassword) {
-        window.location.href = "https://portal.reckon.com/";// Reckon link in same tab
+        window.location.href = "https://portal.reckon.com/"; // Redirect to Reckon
       } else {
         alert("Incorrect password. Unauthorized access!");
       }
     }
+
+    // --- REMINDER POPUP ---
+    window.addEventListener('load', () => {
+      alert("Reminder: For your security, always open this portal in Incognito/Private mode.");
+    });
   </script>
 </body>
 </html>
