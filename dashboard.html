@@ -18,21 +18,38 @@
       text-align: center;
     }
 
-    /* KG Logo (consistent with login page) */
+    /* ✅ EXACT MATCH TO PASSWORD PAGE KG LOGO */
     .logo {
-      width: 90px;
-      height: 90px;
+      width: 100px;
+      height: 100px;
       margin-bottom: 20px;
-      background: linear-gradient(145deg, #ff4d4f, #a8071a);
-      border-radius: 15px;
+      background: linear-gradient(145deg, #ff1a1a, #b30000);
+      border-radius: 20%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 2em;
+      font-size: 2.2em;
       font-weight: 800;
       color: white;
       letter-spacing: 1px;
-      box-shadow: 0 0 20px rgba(255, 77, 79, 0.4);
+      box-shadow: 0 0 25px rgba(255, 26, 26, 0.5),
+                  inset 0 2px 5px rgba(255, 255, 255, 0.3),
+                  inset 0 -2px 8px rgba(0, 0, 0, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Adds subtle glossy shine */
+    .logo::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(145deg, rgba(255,255,255,0.35), transparent 60%);
+      border-radius: 20%;
+      pointer-events: none;
     }
 
     h1 {
