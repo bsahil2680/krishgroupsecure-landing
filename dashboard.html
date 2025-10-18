@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Krish Group Secure Dashboard</title>
+  <style>
+    body {
+      background-color: #0d1117;
+      color: #f0f6fc;
+      font-family: "Segoe UI", Arial, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .logo {
+      width: 90px;
+      height: 90px;
+      background: linear-gradient(145deg, #ff4d4f, #a8071a);
+      border-radius: 15px;
+      color: white;
+      font-weight: 800;
+      font-size: 2em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      box-shadow: 0 0 20px rgba(255, 77, 79, 0.4);
+    }
+
+    h1 {
+      font-size: 2em;
+      font-weight: 800;
+      color: #58a6ff;
+      margin-bottom: 8px;
+      background: linear-gradient(90deg, #58a6ff, #89c2ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    h2 {
+      font-size: 1.2em;
+      color: #58a6ff;
+      margin-top: 0;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+
+    p {
+      color: #c9d1d9;
+      margin-bottom: 35px;
+    }
+
+    .button-container {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    button {
+      padding: 15px 35px;
+      border: none;
+      border-radius: 8px;
+      background: linear-gradient(90deg, #0070f3, #58a6ff);
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 1em;
+      box-shadow: 0 4px 10px rgba(56, 139, 253, 0.4);
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      background: linear-gradient(90deg, #0059c9, #0070f3);
+      transform: translateY(-2px);
+    }
+
+    .secondary {
+      background: linear-gradient(90deg, #ff4d4f, #a8071a);
+      box-shadow: 0 4px 10px rgba(255, 77, 79, 0.4);
+    }
+
+    .secondary:hover {
+      background: linear-gradient(90deg, #d9363e, #820014);
+    }
+
+    footer {
+      position: absolute;
+      bottom: 20px;
+      font-size: 0.85em;
+      color: #8b949e;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="logo">KG</div>
+  <h1>Krish Group</h1>
+  <h2>Secure Portal</h2>
+  <p>Select a system to access:</p>
+
+  <div class="button-container">
+    <button onclick="window.open('https://portal.reckon.com/', '_blank')">
+      Reckon Accounting Portal
+    </button>
+    <button class="secondary" onclick="window.open('https://www.onsitepropertymanager.com/secure', '_blank')">
+      OnSite Property Manager
+    </button>
+  </div>
+
+  <footer>© 2025 Krish Group Canada Ltd — Secure Access Dashboard</footer>
+
+</body>
+</html>
