@@ -10,106 +10,123 @@
       color: #f0f6fc;
       font-family: "Segoe UI", Arial, sans-serif;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
       height: 100vh;
       margin: 0;
-      flex-direction: column;
-      text-align: center;
     }
 
-    /* ✅ EXACT logo style from your password page */
+    .container {
+      background-color: #161b22;
+      padding: 50px 40px;
+      border-radius: 16px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+      text-align: center;
+      width: 380px;
+    }
+
     .logo {
-      width: 80px;
-      height: 80px;
-      margin-bottom: 20px;
-      background: url('https://via.placeholder.com/80/ff0000/ffffff?text=KG') no-repeat center center;
-      background-size: contain;
-      border-radius: 10px;
-      box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+      width: 90px;
+      height: 90px;
+      margin: 0 auto 25px;
+      background: linear-gradient(145deg, #b30000, #ff4d4d);
+      border-radius: 16px;
+      color: #fff;
+      font-weight: bold;
+      font-size: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 20px rgba(255, 77, 77, 0.4);
+      text-shadow: 0 2px 6px rgba(0,0,0,0.6);
+      font-family: "Segoe UI", Arial, sans-serif;
     }
 
     h1 {
-      font-size: 2em;
-      font-weight: 800;
-      margin-bottom: 6px;
-      background: linear-gradient(90deg, #58a6ff, #89c2ff);
+      margin: 0;
+      font-size: 1.8em;
+      background: linear-gradient(90deg, #4da3ff, #0066ff);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      font-weight: 700;
+      letter-spacing: 0.5px;
     }
 
     h2 {
+      margin-top: 5px;
       font-size: 1.2em;
       color: #58a6ff;
       font-weight: 600;
-      margin-top: 0;
-      margin-bottom: 25px;
-    }
-
-    p {
-      color: #c9d1d9;
-      margin-bottom: 35px;
     }
 
     .button-container {
       display: flex;
-      gap: 20px;
-      flex-wrap: wrap;
-      justify-content: center;
+      flex-direction: column;
+      gap: 15px;
+      margin-top: 30px;
     }
 
     button {
-      padding: 15px 35px;
+      padding: 14px;
       border: none;
       border-radius: 8px;
-      background: linear-gradient(90deg, #0070f3, #58a6ff);
-      color: white;
+      font-size: 1em;
       font-weight: bold;
       cursor: pointer;
-      font-size: 1em;
-      box-shadow: 0 4px 10px rgba(56, 139, 253, 0.4);
       transition: all 0.3s ease;
+      background: linear-gradient(90deg, #238636, #2ea043);
+      color: white;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    button.secondary {
+      background: linear-gradient(90deg, #0969da, #1f6feb);
     }
 
     button:hover {
-      background: linear-gradient(90deg, #0059c9, #0070f3);
       transform: translateY(-2px);
-    }
-
-    .secondary {
-      background: linear-gradient(90deg, #ff4d4f, #a8071a);
-      box-shadow: 0 4px 10px rgba(255, 77, 79, 0.4);
-    }
-
-    .secondary:hover {
-      background: linear-gradient(90deg, #d9363e, #820014);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
     }
 
     footer {
-      position: absolute;
-      bottom: 20px;
-      font-size: 0.85em;
+      position: fixed;
+      bottom: 10px;
+      font-size: 0.8em;
       color: #8b949e;
     }
   </style>
 </head>
 <body>
 
-  <div class="logo"></div>
-  <h1>Krish Group</h1>
-  <h2>Secure Portal</h2>
-  <p>Select a system to access:</p>
+  <div class="container">
+    <div class="logo">KG</div>
+    <h1>Krish Group</h1>
+    <h2>Secure Portal</h2>
 
-  <div class="button-container">
-    <button onclick="window.open('https://portal.reckon.com/', '_blank')">
-      Accounting Portal
-    </button>
-    <button class="secondary" onclick="window.open('https://www.onsitepropertymanager.com/secure', '_blank')">
-      Rent / Sales Portal
-    </button>
+    <div class="button-container">
+      <button onclick="window.open('https://portal.reckon.com/', '_blank')">Accounting Portal</button>
+      <button class="secondary" onclick="checkRentAccess()">Rent / Sales Portal</button>
+    </div>
   </div>
 
-  <footer>© 2025 Krish Group Canada Ltd — Secure Access Dashboard</footer>
+  <footer>© 2025 Krish Group Canada Ltd</footer>
+
+  <script>
+    // List of users allowed to access Rent/Sales Portal
+    const allowedRentUsers = ["bsahil82@gmail.com", "pritibhatia880@gmail.com", "aesha149@gmail.com"];
+
+    // Simulated user login for now
+    const currentUser = localStorage.getItem("currentUser") || "guest";
+
+    function checkRentAccess() {
+      if (allowedRentUsers.includes(currentUser)) {
+        window.open("https://www.onsitepropertymanager.com/secure", "_blank");
+      } else {
+        alert("Access Denied: You are not authorized to open Rent / Sales Portal.");
+      }
+    }
+  </script>
 
 </body>
 </html>
