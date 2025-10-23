@@ -45,7 +45,7 @@
 
     h1 {
       margin: 0;
-      font-size: 1.8em;
+      font-size: 1.9em;
       background: linear-gradient(90deg, #4da3ff, #0066ff);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -56,7 +56,9 @@
     h2 {
       margin-top: 5px;
       font-size: 1.2em;
-      color: #58a6ff;
+      background: linear-gradient(90deg, #00d084, #00ff88);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
       font-weight: 600;
     }
 
@@ -75,12 +77,17 @@
       font-weight: bold;
       cursor: pointer;
       transition: all 0.3s ease;
-      background: linear-gradient(90deg, #238636, #2ea043);
       color: white;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     }
 
-    button.secondary {
+    /* Orange for Accounting Portal */
+    #accButton {
+      background: linear-gradient(90deg, #ff8c1a, #ff6600);
+    }
+
+    /* Blue for Rent/Sales Portal */
+    #rentButton {
       background: linear-gradient(90deg, #0969da, #1f6feb);
     }
 
@@ -105,25 +112,34 @@
     <h2>Secure Portal</h2>
 
     <div class="button-container">
-      <button onclick="window.open('https://portal.reckon.com/', '_blank')">Accounting Portal</button>
-      <button class="secondary" onclick="checkRentAccess()">Rent / Sales Portal</button>
+      <button id="accButton" onclick="window.open('https://portal.reckon.com/', '_blank')">
+        Accounting Portal
+      </button>
+      <button id="rentButton" onclick="checkRentAccess()">
+        Rent / Sales Portal
+      </button>
     </div>
   </div>
 
-  <footer>© 2025 Krish Group Ltd</footer>
+  <footer>© 2025 Krish Group Canada Ltd</footer>
 
   <script>
-    // List of users allowed to access Rent/Sales Portal
-    const allowedRentUsers = ["bsahil82@gmail.com", "pritibhatia880@gmail.com", "aesha149@gmail.com"];
+    // ✅ Allowed users for Rent/Sales Portal
+    const allowedRentUsers = [
+      "bsahil82@gmail.com",
+      "pritibhatia880@gmail.com",
+      "aesha149@gmail.com",
+      "ravibhatia.krishgroup@gmail.com"
+    ];
 
-    // Simulated user login for now
-    const currentUser = localStorage.getItem("currentUser") || "guest";
+    // Get the stored email from login step (Cloudflare Worker/localStorage)
+    const currentUser = (localStorage.getItem("currentUser") || "").trim().toLowerCase();
 
     function checkRentAccess() {
-      if (allowedRentUsers.includes(currentUser)) {
+      if (allowedRentUsers.map(u => u.toLowerCase()).includes(currentUser)) {
         window.open("https://www.onsitepropertymanager.com/secure", "_blank");
       } else {
-        alert("Access Denied: You are not authorized to open Rent / Sales Portal.");
+        alert("Access Denied: You are not authorized to open the Rent / Sales Portal.");
       }
     }
   </script>
